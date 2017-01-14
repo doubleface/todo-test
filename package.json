@@ -1,0 +1,13 @@
+{
+  "name": "todo",
+  "cozy-type": "static",
+  "cozy-displayName": "todo",
+  "version": "0.0.1",
+  "description": "Next tasks to do in your cozy",
+  "license": "MIT",
+  "cozy-permissions": {
+    "Tasky": {
+      "description": "Create, edit, organize all your tasks."
+    }
+  }
+}
