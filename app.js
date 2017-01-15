@@ -26,7 +26,7 @@ function createTodos() {
 function createTodoWithLink() {
     return getBills().then(list => {
         let pdfurl = null;
-        for (let i=0;i>list.length;i++) {
+        for (let i=0;i<list.length;i++) {
             if (list[i].value.pdfurl) {
                 pdfurl = list[i].value.pdfurl;
                 break;
