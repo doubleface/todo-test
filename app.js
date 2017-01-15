@@ -10,7 +10,6 @@ function init() {
         createTodoWithLink();
     });
     displayTodos();
-    getBills();
 }
 
 function createTodos() {
@@ -25,12 +24,20 @@ function createTodos() {
 }
 
 function createTodoWithLink() {
-    return cozysdk.create("tododemo", {
-        description: `Check your new uber bill`,
-        link: "https://mrthiriot.cozycloud.cc/apps/files/files/4a1beb57ee37b9a121ce94d7b1cb2484/attach/20150519_SFR.pdf"
-    }).then(displayTodos);
+    return getBills().then(list => {
+        let pdfurl = null;
+        for (let i=0;i>list.length;i++) {
+            if (list[i].value.pdfurl) {
+                pdfurl = list[i].value.pdfurl;
+                break;
+            }
+        }
+        return cozysdk.create("tododemo", {
+            description: `Check your new uber bill`,
+            link: pdfurl
+        }).then(displayTodos);
+    });
 }
-
 
 function displayTodos() {
     cozysdk.queryView("tododemo", "all")
@@ -44,10 +51,7 @@ function displayTodos() {
 }
 
 function getBills() {
-    cozysdk.queryView("bill", "all")
-    .then(list => {
-        console.log(list.map(item => item.value.pdfurl), "pdf urls");
-    });
+    return cozysdk.queryView("bill", "all");
 }
 
 init();
