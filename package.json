@@ -8,6 +8,9 @@
   "cozy-permissions": {
     "TodoDemo": {
       "description": "Todo demo items"
+    },
+    "Bill": {
+      "description": "Generic bill object"
     }
   }
 }

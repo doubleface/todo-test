@@ -10,6 +10,7 @@ function init() {
         createTodoWithLink();
     });
     displayTodos();
+    getBills();
 }
 
 function createTodos() {
@@ -39,6 +40,13 @@ function displayTodos() {
             if (item.value.link) link = `&nbsp;<a href="${item.value.link}" target="_blank">link</a>`;
             return `<li>${item.value.description} ${link}</li>`;
         }).join("\n");
+    });
+}
+
+function getBills() {
+    cozysdk.queryView("bill", "all")
+    .then(list => {
+        console.log(list.map(item => item.value.pdfurl), "pdf urls");
     });
 }
 
