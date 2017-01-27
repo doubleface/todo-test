@@ -1,6 +1,16 @@
 const todo = document.querySelector("#todo");
+const btncreate = document.querySelector("#create");
+const btncreate_special = document.querySelector("#create_special");
 
-let plist = getTodos();
+function init() {
+    btncreate.addEventListener("click", () => {
+        createTodos();
+    });
+    btncreate_special.addEventListener("click", () => {
+        createTodoWithLink();
+    });
+    displayTodos();
+}
 
 function createTodos() {
     var p = Promise.resolve();
@@ -10,29 +20,29 @@ function createTodos() {
         });
     }
 
-    p.then(getTodos).then(displayTodos);
+    p.then(displayTodos);
 }
 
 function createTodoWithLink() {
     return cozysdk.create("tasky", {
         description: `Check your new uber bill`,
         link: "https://mrthiriot.cozycloud.cc/apps/files/files/4a1beb57ee37b9a121ce94d7b1cb2484/attach/20150519_SFR.pdf"
-    }).then(getTodos).then(displayTodos);
+    }).then(displayTodos);
 }
 
-function getTodos() {
-    return cozysdk.queryView("tasky", "all");
+
+function displayTodos() {
+    cozysdk.queryView("tasky", "all")
+    .then(list => {
+        todo.innerHTML = list.map(item => {
+            let link = "";
+            if (item.value.link) link = `&nbsp;<a href="${item.value.link}" target="_blank">link</a>`;
+            return `<li>${item.value.description} ${link}</li>`;
+        }).join("\n");
+    });
 }
 
-function displayTodos(list) {
-    todo.innerHTML = list.map(item => {
-        let link = "";
-        if (item.value.link) link = `&nbsp;<a href="${item.value.link}" target="_blank">link</a>`;
-        return `<li>${item.value.description} ${link}</li>`;
-    }).join("\n");
-}
-
-plist.then(displayTodos);
+init();
 
 window.createTodos = createTodos;
 window.createTodoWithLink = createTodoWithLink;
