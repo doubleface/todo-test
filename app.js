@@ -16,7 +16,7 @@ function createTodos() {
     var p = Promise.resolve();
     for (let i = 0; i< 10; i++) {
         p.then(() => {
-            return cozysdk.create("tasky", {description: `new task ${i}`});
+            return cozysdk.create("tododemo", {description: `new task ${i}`});
         });
     }
 
@@ -24,7 +24,7 @@ function createTodos() {
 }
 
 function createTodoWithLink() {
-    return cozysdk.create("tasky", {
+    return cozysdk.create("tododemo", {
         description: `Check your new uber bill`,
         link: "https://mrthiriot.cozycloud.cc/apps/files/files/4a1beb57ee37b9a121ce94d7b1cb2484/attach/20150519_SFR.pdf"
     }).then(displayTodos);
@@ -32,7 +32,7 @@ function createTodoWithLink() {
 
 
 function displayTodos() {
-    cozysdk.queryView("tasky", "all")
+    cozysdk.queryView("tododemo", "all")
     .then(list => {
         todo.innerHTML = list.map(item => {
             let link = "";
@@ -43,6 +43,3 @@ function displayTodos() {
 }
 
 init();
-
-window.createTodos = createTodos;
-window.createTodoWithLink = createTodoWithLink;

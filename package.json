@@ -6,8 +6,8 @@
   "description": "Next tasks to do in your cozy",
   "license": "MIT",
   "cozy-permissions": {
-    "Tasky": {
-      "description": "Create, edit, organize all your tasks."
+    "TodoDemo": {
+      "description": "Todo demo items"
     }
   }
 }
