@@ -4,7 +4,7 @@ let plist = cozysdk.queryView("tasky", "all");
 
 function displayTodo(list) {
     todo.innerHTML = list.map(item => {
-        return `<li>${item.values.description}</li>`;
+        return `<li>${item.value.description}</li>`;
     }).join("\n");
 }
 
