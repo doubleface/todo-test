@@ -3,15 +3,33 @@
     <head>
         <meta charset="utf-8" />
         <title>TODO</title>
+        <link rel="stylesheet" href="css/bootstrap.css">
+        <link rel="stylesheet" href="css/bootstrap-theme.css">
+<style>
+    .row {
+        margin-top: 3em;
+    }
+    #todo {
+        margin-top: 3em;
+    }
+</style>
     </head>
     <body>
-        <main>
-            <button id="create">Create tasks</button>
-            <button id="create_special">Create special task</button>
-            <ul id="todo"></ul>
-        </main>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-6 col-md-4">&nbsp;</div>
+                <div class="col-xs-6 col-md-4">
+            <main>
+                <button id="create">Create tasks</button>
+                <button id="create_special">Create special task</button>
+                <ul id="todo" class="list-group"></ul>
+            </main>
+                </div>
+                <div class="col-xs-6 col-md-4">&nbsp;</div>
+            </div>
+        </div>
         <script src="cozysdk-client.js"></script>
         <script src="app.js"></script>
-        <script src="mockup.js"></script>
+        <!--<script src="mockup.js"></script>-->
     </body>
 </html>
