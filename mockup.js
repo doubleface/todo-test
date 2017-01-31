@@ -13,23 +13,23 @@ function createTodos() {
 }
 
 function createTodoWithLink() {
-    return getBills().then(list => {
-        let pdfurl = null;
-        for (let i=0;i<list.length;i++) {
-            if (list[i].value.pdfurl) {
-                pdfurl = list[i].value.pdfurl;
-                break;
-            }
+    return getBill().then(item => {
+        if (item === undefined) {
+            return window.alert("no document found");
+        } else {
+            let url = `/apps/files/files/${item.value._id}/attach/${item.value.name}`;
+            return window.cozysdk.create("tododemo", {
+                description: `Check your new <a href="${url}" target="_blank">bill </a>`,
+            }).then(window.displayTodos);
         }
-        return window.cozysdk.create("tododemo", {
-            description: `Check your new uber bill`,
-            link: pdfurl
-        }).then(window.displayTodos);
     });
 }
 
-function getBills() {
-    return window.cozysdk.queryView("bill", "all");
+function getBill() {
+    return window.cozysdk.queryView("file", "all")
+    .then(list => {
+        return list.find(item => item.value.class === "document");
+    });
 }
 
 btncreate.addEventListener("click", () => {
